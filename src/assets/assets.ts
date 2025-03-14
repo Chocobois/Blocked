@@ -1,44 +1,36 @@
-import { Image, SpriteSheet, Audio } from './util';
-import { image, sound, music, loadFont, spritesheet } from './util';
-
-/* Images */
-const images: Image[] = [
-	// Backgrounds
-	image('backgrounds/background', 'background'),
-
-	// Characters
-	image('characters/player', 'player'),
-
-	// Items
-	image('items/coin', 'coin'),
-
-	// UI
-	image('ui/hud', 'hud'),
-
-	// Titlescreen
-	image('titlescreen/sky', 'title_sky'),
-	image('titlescreen/background', 'title_background'),
-	image('titlescreen/foreground', 'title_foreground'),
-	image('titlescreen/character', 'title_character'),
-];
+import { Image, SpriteSheet, Audio } from "./util";
+import { image, sound, music, loadFont, spritesheet } from "./util";
 
 /* Spritesheets */
-const spritesheets: SpriteSheet[] = [
-
-];
+const spritesheets: SpriteSheet[] = [];
 
 /* Audios */
 const audios: Audio[] = [
-	music('title', 'm_main_menu'),
-	music('first', 'm_first'),
-	sound('tree/rustle', 't_rustle', 0.5),
+	music("title.mp3", "m_main_menu"),
+	music("first.mp3", "m_first"),
+	sound("tree/rustle.mp3", "t_rustle", 0.5),
 ];
 
-/* Fonts */
-await loadFont('Sketch', 'Game Font');
+/* Images */
+const images: Image[] = [];
 
-export {
-	images,
-	spritesheets,
-	audios
-};
+// Load all images in root folder
+for (const path in import.meta.glob("./images/*")) {
+	const file = path.split("/").pop()!;
+	const key = file.split(".").shift()!;
+	images.push(image(file, key));
+}
+
+// Load all images in subfolders
+for (const path in import.meta.glob("./images/*/*")) {
+	const parts = path.split("/");
+	const folder = parts[parts.length - 2];
+	const file = parts[parts.length - 1];
+	const key = file.split(".")[0];
+	images.push(image(`${folder}/${file}`, `${folder}_${key}`));
+}
+
+/* Fonts */
+await loadFont("DynaPuff-Medium", "Game Font");
+
+export { images, spritesheets, audios };
