@@ -1,9 +1,10 @@
-import { getRandomUsername } from "@/generator/names";
 import { BaseScene } from "@/scenes/BaseScene";
+import { User } from "@/users/User";
 import { Color } from "@/util/colors";
 
 export class ProfileImage extends Phaser.GameObjects.Container {
 	public scene: BaseScene;
+	public user: User;
 
 	private size: number;
 	private color: number;
@@ -11,11 +12,18 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 	// private circleMask: Phaser.Display.Masks.BitmapMask;
 	private username: Phaser.GameObjects.Text;
 
-	constructor(scene: BaseScene, x: number, y: number, size: number) {
+	constructor(
+		scene: BaseScene,
+		x: number,
+		y: number,
+		size: number,
+		user: User
+	) {
 		super(scene, x, y);
 		scene.add.existing(this);
 		this.scene = scene;
 		this.size = size;
+		this.user = user;
 
 		// const circle = scene.make.ep({x, y, });
 		// const circle = scene.add.image(x, y, "circle");
@@ -53,7 +61,7 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 		this.username = scene.addText({
 			x: 0,
 			y: size / 2 + 10,
-			text: getRandomUsername(),
+			text: this.user.name,
 			size: 0.1 * size,
 			weight: 700,
 			color: "black",

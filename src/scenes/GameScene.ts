@@ -1,6 +1,8 @@
 import { BaseScene } from "@/scenes/BaseScene";
 import { ProfileImage } from "@/components/ProfileImage";
 import { UI } from "@/components/UI";
+import { NormalFurry } from "@/users/NormalFurry";
+import { getRandomUser } from "@/generator/getRandomUser";
 
 export class GameScene extends BaseScene {
 	private background: Phaser.GameObjects.Image;
@@ -15,13 +17,14 @@ export class GameScene extends BaseScene {
 		this.cameras.main.setBackgroundColor(0xffffff);
 
 		/* Spawn random profiles */
-		const n = 5;
+		const n = 2;
 		const size = 1000 / n;
 		for (let i = 0; i < n; i++) {
 			for (let j = 0; j < n; j++) {
 				const x = this.CX + size * (i - n / 2 + 0.5);
 				const y = this.CY + size * (j - n / 2 + 0.5);
-				const profile = new ProfileImage(this, x, y, size);
+				const user = getRandomUser();
+				const profile = new ProfileImage(this, x, y, size, user);
 			}
 		}
 	}

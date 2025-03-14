@@ -78,28 +78,7 @@ export function activateDragDebug(
 		});
 }
 
-import * as Neutralino from "@neutralinojs/lib";
-type Neutralino = typeof Neutralino;
-
-export function loadData(key: string, callback: (data: object) => void): void {
-	if (window.NL_TOKEN) {
-		let dataString = Neutralino.storage.getData(key).then((dataString) => {
-			callback(JSON.parse(dataString));
-		});
-	} else {
-		const dataString = localStorage.getItem(key);
-		if (dataString) {
-			callback(JSON.parse(dataString));
-		}
-	}
-}
-
-export function saveData(key: string, data: object): void {
-	if (window.NL_TOKEN) {
-		let dataString = JSON.stringify(data);
-		Neutralino.storage.setData(key, dataString);
-	} else {
-		const dataString = JSON.stringify(data);
-		localStorage.setItem(key, dataString);
-	}
+// Capitalize first letter of a string
+export function capitalize(word: string) {
+	return word.charAt(0).toUpperCase() + word.slice(1);
 }
