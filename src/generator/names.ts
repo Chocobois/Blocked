@@ -1,12 +1,13 @@
-import { animals, appearanceWords } from "./words";
+import appearance from "./adjectives/appearance.json";
+import animals from "@/generator/nouns/animals.json";
 
 function capitalize(word: string) {
 	return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
 export function getRandomUsername() {
-	const appearance = Phaser.Math.RND.pick(appearanceWords);
-	const animal = Phaser.Math.RND.pick(animals);
+	const adj = Phaser.Math.RND.pick(appearance);
+	const noun = Phaser.Math.RND.pick(animals);
 
-	return `${capitalize(appearance)}${capitalize(animal)}`;
+	return `${capitalize(adj)}${capitalize(noun)}`;
 }
