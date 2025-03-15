@@ -3,9 +3,9 @@ import { FruitLover } from "../users/FruitLover";
 import { NormalFurry } from "../users/NormalFurry";
 
 export function getRandomUser(): User {
-	return Phaser.Math.RND.pick([
-		new NormalFurry(),
-		new FruitLover(),
-		// Whoops
+	const userClass = Phaser.Math.RND.pick([
+		NormalFurry,
+		FruitLover,
 	]);
+	return new userClass();
 }
