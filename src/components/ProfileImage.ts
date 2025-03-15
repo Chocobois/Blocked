@@ -10,6 +10,7 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 	private color: number;
 
 	// private circleMask: Phaser.Display.Masks.BitmapMask;
+	private background: Phaser.GameObjects.Image;
 	private username: Phaser.GameObjects.Text;
 
 	constructor(
@@ -26,8 +27,8 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 		this.user = user;
 
 		// const circle = scene.make.ep({x, y, });
-		// const circle = scene.add.image(x, y, "circle");
-		// this.circleMask = circle.createBitmapMask();
+		const circle = scene.make.image({ x, y, key: "circle" });
+		const mask = circle.createBitmapMask();
 
 		// const circle = scene.add.circle(0, 0, size / 2, 0xff0000, 0.5);
 		// this.add(circle);
@@ -52,11 +53,22 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 			Color.Rose300,
 		]);
 
-		this.addPart(["profile_body1", "profile_body2", "profile_body3"]);
+		this.background = scene.add.image(0, 0, "circle");
+		this.background.setTint(this.color * 0);
+		this.background.setScale(size / this.background.width);
+		this.add(this.background);
+
+		const body = this.addPart([
+			"profile_body1",
+			"profile_body2",
+			"profile_body3",
+		]);
 		this.addPart(["profile_head1", "profile_head2", "profile_head3"]);
 		this.addPart(["profile_mouth1", "profile_mouth2", "profile_mouth3"]);
 		this.addPart(["profile_eyes1", "profile_eyes2", "profile_eyes3"]);
 		this.addPart(["profile_hair1", "profile_hair2", "profile_hair3", "empty"]);
+
+		body.setMask(mask);
 
 		this.username = scene.addText({
 			x: 0,
@@ -73,13 +85,12 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 	addPart(keys: string[]) {
 		const key = Phaser.Math.RND.pick(keys);
 		const image = this.scene.add.image(0, 0, key);
+		this.add(image);
 
 		image.setScale(this.size / image.width);
-
 		// image.setMask(this.circleMask);
-
 		image.setTint(this.color);
 
-		this.add(image);
+		return image;
 	}
 }
