@@ -27,8 +27,8 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 		this.user = user;
 
 		// const circle = scene.make.ep({x, y, });
-		const circle = scene.make.image({ x, y, key: "circle" });
-		const mask = circle.createBitmapMask();
+		// const circle = scene.make.image({ x, y, key: "circle" });
+		// const mask = circle.createBitmapMask();
 
 		// const circle = scene.add.circle(0, 0, size / 2, 0xff0000, 0.5);
 		// this.add(circle);
@@ -53,10 +53,10 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 			Color.Rose300,
 		]);
 
-		this.background = scene.add.image(0, 0, "circle");
-		this.background.setTint(this.color * 0);
-		this.background.setScale(size / this.background.width);
-		this.add(this.background);
+		// this.background = scene.add.image(0, 0, "circle");
+		// this.background.setTint(this.color * 0);
+		// this.background.setScale(size / this.background.width);
+		// this.add(this.background);
 
 		const body = this.addPart([
 			"profile_body1",
@@ -68,7 +68,7 @@ export class ProfileImage extends Phaser.GameObjects.Container {
 		this.addPart(["profile_eyes1", "profile_eyes2", "profile_eyes3"]);
 		this.addPart(["profile_hair1", "profile_hair2", "profile_hair3", "empty"]);
 
-		body.setMask(mask);
+		// body.setMask(mask);
 
 		this.username = scene.addText({
 			x: 0,

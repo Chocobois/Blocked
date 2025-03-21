@@ -31,13 +31,13 @@ for (const path in import.meta.glob("./images/*/*")) {
 }
 
 // Load random placeholder assets
-for (let i = 0; i < 3; i++) {
-	const id = Math.floor(Math.random() * 1000);
-	images.push({
-		key: "placeholder" + i,
-		path: `https://picsum.photos/id/${id}/512/512`,
-	});
-}
+// for (let i = 0; i < 3; i++) {
+// 	const id = Math.floor(Math.random() * 100);
+// 	images.push({
+// 		key: "placeholder" + i,
+// 		path: `https://picsum.photos/id/${id}/512/512`,
+// 	});
+// }
 
 /* Fonts */
 await loadFont("DynaPuff-Medium", "Game Font");
